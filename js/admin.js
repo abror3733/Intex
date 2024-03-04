@@ -6,6 +6,12 @@ let elTbody =document.querySelector(".table__tbody")
 let elModalWrapper =document.querySelector(".modal-wrapper")
 let elModal =document.querySelector(".modal")
 
+let elInnerList =document.querySelector(".inner__list")
+elInnerList.addEventListener("click",function(evt){
+  renderProducts(products,elTbody,evt.target.id)
+
+})
+
 let products =JSON.parse(window.localStorage.getItem("products")) || []
 
 
@@ -44,8 +50,8 @@ elAddButton.addEventListener("click",function(){
            <label class="form__label">
               <span class="">Enter product old price</span>
                <select class="form__label-input">
-                 <option value="0">Каркасные</option>
-                 <option value="1">Надувные</option>
+                 <option value="0">Надувные</option>
+                 <option value="1"> Каркасные</option>
                </select>
            </label>
            <label class="form__label">
@@ -78,7 +84,7 @@ elAddButton.addEventListener("click",function(){
       type:evt.target[6].value 
     }
    products.push(data)
-   renderProducts(products,elTbody)
+   renderProducts(products,elTbody,0)
    elModalWrapper.classList.remove("open-modal")
    window.localStorage.setItem("products", JSON.stringify(products))
   })
@@ -95,31 +101,34 @@ elModalWrapper.addEventListener("click",function(evt){
 
 // ----------render start-------
  
-function renderProducts(arr,list){
+function renderProducts(arr,list,id){
   list.innerHTML = ""
-  arr.map(item=>{
-    let elaTr =document.createElement("tr")
-    elaTr.innerHTML=`
-         <td class="tbody-td td-first">
-           <img src="${item.img}" alt="render-img" width="60" height="40"/>
-         </td>
-         <td class="tbody-td">
-           <span class="tbody-span">${item.oldPrice}</span>
-           <strong class="tbody-strong">${item.newPrice}</strong>
-          </td>
-          <td class="tbody-td">
-                ${item.quntity}
-          </td>
-          <td class="tbody-td ${item.status== "0" ? "text-simple":""} ${item.status== "1" ? "text-green":""} ${item.status== "2" ? "text-yellow":""} ${item.status== "3" ? "text-red":""} ">
-               ${item.status == "0" ? "Простой" : ""}
-               ${item.status == "1" ? "Рекомендуем" : ""}
-               ${item.status == "2" ? "Cкидка" : ""}
-               ${item.status == "3" ? "Нет в наличии" : ""}
-          </td>
-              <td  class="tbody-td td-last">More,Update </td>
-    `
-    list.appendChild(elaTr)
+  arr.filter(item=>{
+    if(item.type==id){
+      let elaTr =document.createElement("tr")
+      elaTr.innerHTML=`
+           <td class="tbody-td td-first">
+             <img src="${item.img}" alt="render-img" width="60" height="40"/>
+           </td>
+           <td class="tbody-td">
+             <span class="tbody-span">${item.oldPrice}</span>
+             <strong class="tbody-strong">${item.newPrice}</strong>
+            </td>
+            <td class="tbody-td">
+                  ${item.quntity}
+            </td>
+            <td class="tbody-td ${item.status== "1" ? "text-green":""} ${item.status== "2" ? "text-yellow":""} ${item.status== "3" ? "text-red":""} ">
+                 ${item.status == "0" ? "Простой" : ""}
+                 ${item.status == "1" ? "Рекомендуем" : ""}
+                 ${item.status == "2" ? "Cкидка" : ""}
+                 ${item.status == "3" ? "Нет в наличии" : ""}
+            </td>
+                <td  class="tbody-td td-last">More,Update </td>
+      `
+      list.appendChild(elaTr)
+
+    }
   })
 }
-renderProducts(products,elTbody)
+renderProducts(products,elTbody,0)
 // ----------render end-------
