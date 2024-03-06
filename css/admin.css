@@ -1,0 +1,45 @@
+
+
+body{
+  background: #F8F8F8;
+  font-family: sans-serif;
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+.modal-wrapper{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  backdrop-filter: blur(23px);
+  background: rgba(0, 0, 0, 0.19); 
+  display: none;
+}
+.modal{
+  width: 50%;
+  padding: 20px;
+  background-color: #F8F8F8;
+  border-radius: 25px;
+  margin: 50px auto;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.open-modal{
+  display: block;
+}
+.item-active{
+  color: #009398;
+  border-bottom: 3px solid #009398;
+}
+/* // text-[#009398] border-b-[3px] border-[#009398] */
