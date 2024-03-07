@@ -5,11 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>INTEX-MARKET.UZ</title>
   <link rel="stylesheet" href="./css/ui.css">
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+    }
+  </style>
 </head>
 <body>
    <button style=" padding: 40px; background-color: aqua; color: white; margin: 100px 100px; text-align: center;">
      <a href="admin.html"> uyga vazifa Shu yerda</a>
    </button>
+
+
+
+   <script src="https://cdn.tailwindcss.com"></script>
+   <script>
+     tailwind.config = {
+       theme: {
+         extend: {
+           colors: {
+             clifford: '#da373d',
+           }
+         }
+       }
+     }
+   </script>
 </body>
-<script src="./js/app.js"></script>
+<script src="./js/ui.js"></script>
 </html>
