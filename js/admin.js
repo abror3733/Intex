@@ -10,7 +10,9 @@ let elModal =document.querySelector(".modal")
 let elNavList =document.querySelector(".nav-list")
 let elItem1 =document.querySelector(".item-1")
 let elItem2 =document.querySelector(".item-2")
-// text-[#009398] border-b-[3px] border-[#009398]
+
+let elSearchInput =document.querySelector(".search-input")
+
 elNavList.addEventListener("click",function(evt){
   if(evt.target.id){
     if( evt.target.id==0 ){
@@ -44,8 +46,8 @@ elAddBtn.addEventListener("click",function(){
   elModal.innerHTML=`
      <form class="add-form">
         <label>
-           <div class="w-[80%] h-[200px] rounded-[10px] bg-white border-[2px] border-dotted border-black p-3 m-auto cursor-pointer  flex items-center justify-center">
-             <img class="render-img" src="./images/img.png" alt="img" width="350" height="45"/>
+           <div class="w-[80%] h-[200px] rounded-[10px] bg-white border-[2px] border-dotted border-black p-[40px] m-auto cursor-pointer  flex items-center justify-center">
+             <img class="render-img" src="./images/img.png" alt="img" width="250" height="45"/>
              <input class="visually-hidden get-img " type ="file"/>
            </div>
         </label>
@@ -100,9 +102,9 @@ elAddBtn.addEventListener("click",function(){
 
   
 
-  //  elInputChange.addEventListener("change",function(evt){
-  //     elRenderImg.src =URL.createObjectURL(evt.target.files[0])
-  //  })
+   elInputChange.addEventListener("change",function(evt){
+      elRenderImg.src =URL.createObjectURL(evt.target.files[0])
+   })
     
 
    elForm.addEventListener("submit",function(evt){
@@ -158,8 +160,8 @@ function renderProducts(arr,list,id){
            ${item.status == "3" ? "Нет в наличии" : ""}
       </td>
       <td class="text-center p-2 bg-slate-200 rounded-r-[20px]">
-        <button onclick="updateProduct(${item.id})" class="p-1 bg-green-500 text-white border-none rounded-md">Update</button>
-        <button class="p-1 bg-red-500 text-white border-none rounded-md">Delete</button>
+        <button onclick="updateProduct(${item.id})" class="p-1 bg-green-500 text-white border-none rounded-md hover:opacity-50 ease-linear duration-200">Update</button>
+        <button onclick="deleteProduct(${item.id})" class="p-1 bg-red-500 text-white border-none rounded-md hover:opacity-50 ease-linear duration-200">Delete</button>
       </td>
       `
       list.appendChild(elTr)
@@ -177,7 +179,7 @@ function updateProduct(id){
      <form class="update-form">
         <label>
            <div class="w-[80%] h-[200px] rounded-[10px] bg-white border-[2px] border-dotted border-black p-3 m-auto cursor-pointer  flex items-center justify-center">
-             <img class="update-render-img" src="${data.img}" alt="img" width="350" height="45"/>
+             <img class="update-render-img" src=${data.img} alt="img" width="350" height="45"/>
              <input  class="visually-hidden update-get-img " type ="file"/>
            </div>
         </label>
@@ -210,7 +212,7 @@ function updateProduct(id){
                </label>
                <label class="flex flex-col">
                    <span>Choose status</span>
-                   <select class="p-2  pt-[13px] border-b-[1px] border-black outline-none update-status-selcet">
+                   <select class="p-2  pt-[13px] border-b-[1px] border-black outline-none update-status-select">
                          <option value="0">Not</option>
                          <option value="1">Рекомендуем</option>
                          <option value="2">Cкидка</option>
@@ -222,29 +224,97 @@ function updateProduct(id){
         <span>
         <img class="absolute left-[640px] top-[20px] cursor-pointer  hover:scale-150 ease-linear duration-200 z-500" id="ximg" src="./images/xxx.svg" alt="icon" width="15" height="15">
         </span>
-        <button class="mt-[10px] w-[200px] py-[8px] px-[15px] font-bold text-[22px] text-white bg-[#009398] rounded-[25px] mx-[220px] hover:opacity-50 ease-linear duration-200 ">Добавить</button>
+        <button  class="mt-[10px] w-[200px] py-[8px] px-[15px] font-bold text-[22px] text-white bg-[#009398] rounded-[25px] mx-[220px] hover:opacity-50 ease-linear duration-200 ">Добавить</button>
      </form>
   `
   let elUpdateForm =document.querySelector(".update-form")
   let elTypeSelect = document.querySelector(".update-type-select")
   let elStatusSelect = document.querySelector(".update-status-select")
+  let elUpdateImgInput = document.querySelector(".update-get-img")
+  let elUpdateImg =document.querySelector(".update-render-img")
+
 
   elTypeSelect.value=data.type
   elStatusSelect.value=data.status
 
-  elUpdateForm.addEventListener("click",function(evt){
+  elUpdateImgInput.addEventListener("change",function(evt){
+    elUpdateImg.src=URL.createObjectURL(evt.target.files[0])
+  })
+
+  elUpdateForm.addEventListener("submit",function(evt){
     evt.preventDefault()
-    data.img=URL.createObjectURL(evt.target[0].files[0])
+    data.img=elUpdateImg.src
     data.name=evt.target[1].value
     data.oldPrice=evt.target[2].value
     data.newPrice=evt.target[3].value
     data.quantity=evt.target[4].value
     data.type=evt.target[5].value
     data.status=evt.target[6].value
+    
+    elModalWrapper.classList.remove("open-modal")
+    renderProducts(products,eltBody,evt.target[5].value)
+    window.localStorage.setItem("products", JSON.stringify(products))
   })
-  elModalWrapper.classList.remove("open-modal")
-  renderProducts(products,eltBody,evt.target[5].value)
+
 }
 
 
 // --------Update end -------
+// --------Delete start -------
+
+function deleteProduct(id){
+  let findObj =products.find(item=>item.id==id)
+  let finedIndex =products.findIndex(item=>item.id==id)
+  let confirmDelete =confirm()
+  if(confirmDelete==true){
+    products.splice(finedIndex,1)
+    renderProducts(products,eltBody,findObj.type)
+    window.localStorage.setItem("products", JSON.stringify(products))
+  }
+  else{
+    renderProducts(products,eltBody,findObj.type)
+  }
+}
+
+// --------Delete end -------
+
+// --------Search start -------
+let elSearchList =document.querySelector(".search-list")
+elSearchInput.addEventListener("keyup",function(evt){
+ let data =products.filter(item=>item.name.toLowerCase().includes(evt.target.value.toLowerCase()))
+ elSearchList.innerHTML=``
+ data.map(item=>{
+  let elListItem =document.createElement("li")
+  elListItem.classList.add("list-item")
+  elListItem.dataset.id=item.id
+  elListItem.textContent=`${item.name} - ${item.newPrice}`
+  elSearchList.appendChild(elListItem)
+ 
+  elListItem.addEventListener("cilck", function(evt){
+  let clickedid = evt.target.dataset.id
+  let dataClick =products.find(item=>item.id==clickedid)
+  elSearchInput.value = `${dataClick.name}`
+
+  let elSearchFilter =products.filter(item=>item.id == clickedid)
+ renderProducts(elSearchFilter,eltBody,dataClick.type)
+  })
+
+ })
+    
+
+     if(evt.target.value){
+      elSearchList.classList.add("open-list")
+     }
+     else{
+          elSearchList.classList.remove("open-list")
+     }
+
+
+})
+
+
+// --------Search end -------
+
+elSearchInput.addEventListener("blur",function(evt){
+  elSearchList.classList.remove("open-list")
+})

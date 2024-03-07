@@ -12,6 +12,7 @@
       }
     }
   </style>
+   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 
@@ -46,11 +47,14 @@
       </div>
       <div class="flex items-center justify-between py-[22px] px-[42px]">
         <label class="flex items-center">
-          <input class="w-[320px] h-[60px] py-[11px] pr-[25px] pl-[34px] rounded-[30px] relative focus:outline-none  shadow-lg shadow-indigo-300/50 " type="text" placeholder="Найти">
+          <input class="search-input w-[320px] h-[60px] py-[11px] pr-[25px] pl-[34px] rounded-[30px] relative focus:outline-none  shadow-lg shadow-indigo-300/50 " type="text" placeholder="Найти">
             <div class="flex gap-[20px] absolute left-[570px]">
               <span class="w-[2px] h-[40px] bg-[#EBEBFF] block"></span>
               <img class="cursor-pointer" src="./images/search.svg" alt="search" width="24" height="24">
             </div>
+            <ul class="search-list absolute top-[170px] left-[325px] w-[318px] p-1 pl-[10px]  ">
+              <!-- <li>sas</li> -->
+            </ul>
         </label>
         <button class="add-btn w-[250px] h-[60px] bg-[#009398] pt-[17px] pb-[20px] px-[14px] text-white font-bold text-[18px] rounded-[30px] hover:opacity-50 ease-linear duration-200">+ Добавить продукт</button>
       </div>

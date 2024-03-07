@@ -43,3 +43,25 @@ body{
   border-bottom: 3px solid #009398;
 }
 /* // text-[#009398] border-b-[3px] border-[#009398] */
+
+/* absolute top-[170px] left-[325px] bg-white w-[318px] p-1 pl-[10px] open-list  */
+.search-list{
+  opacity: 0;
+}
+.open-list{
+  opacity: 1;
+  background: white;
+  border-radius: 5px;
+ 
+  /* position: absolute;
+  top: 170px;
+  background-color: white;
+  width: 318px;
+  padding-left: 10px;
+  left: 325px */
+}
+.list-item{
+  padding: 10px 0;
+  color: black;
+  cursor: pointer;
+}
