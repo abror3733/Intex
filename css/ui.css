@@ -1,0 +1,106 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: sans-serif;
+}
+body{
+  background: rgb(229, 229, 229);
+}
+
+.container{
+  padding: 0 25px;
+  margin: 0 auto;
+}
+.hero-section {
+  background-image:url("../images/we.jpg") ;
+  background-repeat: no-repeat;
+  background-position: bottom ;
+  height:120vh;
+  width: 100%;
+  background-size: cover;
+}
+.list-item{
+  text-align: center;
+  position: relative;
+  padding: 30px;
+  padding-top: 50px;
+  width: 340px;
+  height: 284px;
+  border-radius: 0px 35px 35px 35px;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+  background: rgb(255, 255, 255);
+  transition: all 0.4s ease;
+}
+.list-item:hover{
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  transform: translateY(5px);
+}
+.sezonaya-wrap:hover{
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  transform: translateY(42px);
+}
+.top-status{
+  padding: 10px 20px;
+  width: 153px;
+  height: 40px;
+  top: 0;
+  left: 0;
+  border-bottom-right-radius: 10px;
+  position: absolute;
+}
+.order-btn{
+  transition: all 0.3s ease;
+}
+.order-btn:hover{
+  /* box-shadow: rgba(0, 0, 0, 0.45) 0px -50px 36px -28px inset; */
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.modal-wrapper{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  backdrop-filter: blur(23px);
+  background: rgba(0, 0, 0, 0.19); 
+  display: none;
+}
+.modal{
+  width: 1000px;
+  height: 500px;
+  padding: 20px;
+  background-color: #F8F8F8;
+  border-radius: 25px;
+  margin: 50px auto;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 20px 44px 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.open-modal{
+  display: block;
+}
+.open-inner-modal{
+  border-radius: 0px 35px 35px 35px;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+  background: rgb(255, 255, 255);
+}
+.karta-img, .input-order { 
+  border-radius: 17px;
+  box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.25);
+  background: rgb(248, 248, 248);
+}
+.order-btn-modal {
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+  background: rgb(255, 230, 0);
+  transition: all 0.3s ease;
+}
+.order-btn-modal:hover{
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
