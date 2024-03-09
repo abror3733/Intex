@@ -93,7 +93,8 @@ function orderProduct(id){
       img:data.img,
       price:data.newPrice
     }
-    console.log(orderData);
+    orderProductList.push(orderData)
+    elModalWrapper.classList.remove("open-modal")
   })
 }
 orderProduct(id)
